@@ -56,12 +56,16 @@
                 </div>
             </div>
           </a>
-          <div>
+          <div style="visibility:{{user_login}}">
             <span>{{request.user}}</span>
             <a href="{% url 'logout' %}">Log out</a>
+          </div>
+
+          <div style="visibility:{{user_not_login}}">
             <a href="{% url 'register' %}"  style="text-decoration:none;color:black">Dang ky &emsp;</a>||
             <a href="{% url 'login' %}"  style="text-decoration:none;color:black">&emsp; Dang nhap</a>
           </div>
+
         </div>
       </div>
     </nav>
