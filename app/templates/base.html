@@ -9,67 +9,102 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
     {% load static %}
 
     <script type="text/javascript">
         var user = '{{request.user}}'
-        console.log(user)
+        function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+      }
+      const csrftoken = getCookie('csrftoken');
+      console.log(csrftoken)
+
+
     </script>
   <title>Ecomere web</title>
 </head>
 <body style="background-color: #eee;">
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+      <div class="container ">
+        <a class="navbar-brand" href="#">ĐIỆN MÁY</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Trang chủ</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="#">Giới thiệu</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
+                Danh mục
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Laptops</a></li>
+                <li><a class="dropdown-item" href="#">Điện thoại</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="#">Xem thêm</a></li>
               </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
           </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+
+          <form class="d-flex" method="POST" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input class="form-control me-2" type="search" placeholder="Nhập tìm kiếm" aria-label="Search" name="searched">
+            <button class="btn btn-outline-success" type="submit" style="fill:#198754">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+            </button>
           </form>
+
           <a href="{% url 'cart' %}">
             <div class="mx-5 position-relative"  style="fill:black;font-size:20px;width:40px">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
                   <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
                 </svg>
                 <div class="rounded-circle position-absolute top-0 end-0 text-center fw-bold" style="width:20px;height:20px;font-size:12px;color:white;background:rgba(220,53,69,0.8)">
-                  <span style="opacity:1">5</span>
+                  <span style="opacity:1">{{cart}}</span>
                 </div>
             </div>
           </a>
-          <div style="visibility:{{user_login}}">
-            <span>{{request.user}}</span>
-            <a href="{% url 'logout' %}">Log out</a>
-          </div>
 
-          <div style="visibility:{{user_not_login}}">
-            <a href="{% url 'register' %}"  style="text-decoration:none;color:black">Dang ky &emsp;</a>||
-            <a href="{% url 'login' %}"  style="text-decoration:none;color:black">&emsp; Dang nhap</a>
+          {% if user.is_authenticated %}
+          <div class="btn-group dropstart" style="visibility:{{user_login}}">
+            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" class="rounded-circle" style="width: 50px;" alt="Avatar" />
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2" style='margin-top:60px;margin-right:-50px'>
+              <li><a class="dropdown-item active" href="#">{{request.user}}</a></li>
+              <li><a class="dropdown-item" href="{% url 'profile/' %}">Hồ sơ</a></li>
+              <li><a class="dropdown-item" href="{% url 'changePassword/' %}">Đổi mật khẩu</a></li>
+              <li><a class="dropdown-item" href="{% url 'historyOrder/' %}">Lịch sử mua hàng</a></li>
+              <li><a class="dropdown-item" href="{% url 'changePassword/' %}">Đổi mật khẩu</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Đăng xuất</a></li>
+            </ul>
           </div>
+          {% else %}
+          <div style="visibility:{{user_not_login}}">
+            <a href="{% url 'register' %}"  style="text-decoration:none;color:black">Đăng ký &emsp;</a>||
+            <a href="{% url 'login' %}"  style="text-decoration:none;color:black">&emsp; Đăng nhập</a>
+          </div>
+          {% endif %}
 
         </div>
       </div>
@@ -80,6 +115,12 @@
     {% block payment-content %} {% endblock payment-content %}
     {% block login-content %} {% endblock login-content %}
     {% block register-content %} {% endblock register-content %}
+    {% block search-content %} {% endblock search-content %}
+    {% block detail-content %} {% endblock detail-content %}
+    {% block changePassword-content %} {% endblock changePassword-content %}
+    {% block profile-content %} {% endblock profile-content %}
+    {% block history-content %} {% endblock history-content %}
+
 
 
     <!-- Footer -->
@@ -88,7 +129,7 @@
       <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
         <!-- Left -->
         <div class="me-5 d-none d-lg-block">
-          <span>Get connected with us on social networks:</span>
+          <span>Kết nối với chúng tôi trên các mạng xã hội:</span>
         </div>
         <!-- Left -->
 
@@ -126,7 +167,7 @@
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
               <!-- Content -->
               <h6 class="text-uppercase fw-bold mb-4">
-                <i class="fas fa-gem me-3 text-secondary"></i>Company name
+                <i class="fas fa-gem me-3 text-secondary"></i>Laptops
               </h6>
               <p>
                 Here you can use rows and columns to organize your footer content. Lorem ipsum
@@ -139,19 +180,19 @@
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
               <!-- Links -->
               <h6 class="text-uppercase fw-bold mb-4">
-                Products
+                CHĂM SÓC
               </h6>
               <p>
-                <a href="#!" class="text-reset">Angular</a>
+                <a href="#!" class="text-reset">Hỏi đáp</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">React</a>
+                <a href="#!" class="text-reset">Hướng dẫn</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Vue</a>
+                <a href="#!" class="text-reset">Trả/Hoàn tiền</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Laravel</a>
+                <a href="#!" class="text-reset">Vận chuyển</a>
               </p>
             </div>
             <!-- Grid column -->
@@ -160,19 +201,19 @@
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
               <!-- Links -->
               <h6 class="text-uppercase fw-bold mb-4">
-                Useful links
+                THANH TOÁN
               </h6>
               <p>
-                <a href="#!" class="text-reset">Pricing</a>
+                <a href="#!" class="text-reset">Visa</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Settings</a>
+                <a href="#!" class="text-reset">VNpay</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Orders</a>
+                <a href="#!" class="text-reset">Trả góp</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Help</a>
+                <a href="#!" class="text-reset">Trả góp</a>
               </p>
             </div>
             <!-- Grid column -->
@@ -180,14 +221,13 @@
             <!-- Grid column -->
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-              <p><i class="fas fa-home me-3 text-secondary"></i> New York, NY 10012, US</p>
+              <h6 class="text-uppercase fw-bold mb-4">LIÊN HỆ</h6>
+              <p>UIT</p>
               <p>
-                <i class="fas fa-envelope me-3 text-secondary"></i>
-                info@example.com
+                example@gmail.com
               </p>
-              <p><i class="fas fa-phone me-3 text-secondary"></i> + 01 234 567 88</p>
-              <p><i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
+              <p> example@gmail.com</p>
+              <p> Skype</p>
             </div>
             <!-- Grid column -->
           </div>

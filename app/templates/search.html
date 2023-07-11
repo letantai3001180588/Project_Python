@@ -31,10 +31,10 @@
   <section>
       <div class="container py-2 mb-5" style="margin-top:50px">
         <div class="row">
-          <h2 class="text-center">Kết quả tìm kiếm cho từ khoá </h2>
+          <h2 class="text-center">Kết quả tìm kiếm cho từ khoá ' {{search}} '</h2>
         </div>
         <div class="row">
-          {% for product in products %}
+          {% for product in key %}
           <div class="col-md-8 col-lg-6 col-xl-3 mt-5">
             <div class="card" style="border-radius: 15px;">
               <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light"

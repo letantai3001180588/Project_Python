@@ -65,6 +65,15 @@
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button type="submit" class="btn btn-primary btn-lg">Register</button>
                   </div>
+                  {% if form.errors %}
+                      <ul class="text-danger">
+                      {% for field in form %}
+                          {% for error in field.errors %}
+                              <li>{{ error }}</li>
+                          {% endfor %}
+                      {% endfor %}
+                      </ul>
+                  {% endif %}
 
                 </form>
 
