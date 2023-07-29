@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "ecomere_app/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "ecomere_app/wsgi.py"
+      }
+    ]
+}
