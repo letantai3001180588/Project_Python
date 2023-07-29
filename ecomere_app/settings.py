@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-DATABASES['default']= dj_database_url.config()
+# DATABASES['default']= dj_database_url.parse("postgres://laptopshop_user:4rkFZ5TSGRRMfhOeRzCxY4q3U4UogSKM@dpg-cj2diod9aq0e0q1ijksg-a/laptopshop")
 
 
 # Password validation
