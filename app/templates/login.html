@@ -11,28 +11,27 @@
               <div class="card-body p-md-5 mx-md-4">
 
                 <div class="text-center">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                  <img src="https://www.freepnglogos.com/uploads/laptop-png/laptop-computer-business-vector-graphic-pixabay-14.png"
                     style="width: 185px;" alt="logo">
-                  <h4 class="mt-1 mb-5 pb-1">laptop</h4>
                 </div>
 
                 <form method="POST" action="">
                   {% csrf_token %}
                   <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example11">Username</label>
-                    <input type="text" name="username" id="form2Example11" class="form-control" placeholder="Phone number or email address" />
+                    <label class="form-label" for="form2Example11">Tài khoản:</label>
+                    <input type="text" name="username" id="form2Example11" class="form-control" placeholder="Nhập tài khoản:" />
                   </div>
 
                   <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example22">Password</label>
-                    <input type="password" name="password" id="form2Example22" class="form-control"  placeholder="Password"/>
+                    <label class="form-label" for="form2Example22">Mật khẩu:</label>
+                    <input type="password" name="password" id="form2Example22" class="form-control"  placeholder="Nhập mật khẩu:"/>
                   </div>
 
                   <div class="d-grid gap-2 text-center pt-1 mb-5 pb-1" >
                     <button class="btn  btn-block fa-lg mb-3" type="submit" style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);color:white;">
-                      Login
+                      Đăng nhập
                     </button>
-                    <a class="text-muted" href="#!">Forgot password?</a>
+                    <a class="text-muted" href="#!">Quên mật khẩu</a>
                   </div>
                   <div class="d-flex align-items-center justify-content-center pb-4 text-danger">
                     {% for message in messages %}
@@ -51,10 +50,11 @@
             </div>
             <div class="col-lg-6 d-flex align-items-center" style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4">We are more than just a company</h4>
-                <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <h4 class="mb-4">Laptop Shop</h4>
+                <p class="small mb-0">
+                  Laptop là một trong những mặt hàng công nghệ nhận được rất nhiều sự quan tâm từ phía người dùng. Bạn đang có nhu cầu sở hữu một sản phẩm laptop nhưng còn băn khoăn về khả năng tài chính của mình cũng như nhiều vấn đề liên quan khác? Nếu đúng như vậy thì laptop khuyến mãi sẽ là một lựa chọn mà bạn không nên bỏ qua bởi những trải nghiệm tuyệt vời mà nó mang lại.
+                  Hãy đến với <b>Laptop Shop</b>
+                </p>
               </div>
             </div>
           </div>

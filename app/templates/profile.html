@@ -8,18 +8,25 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;">
-            <h5 class="my-3">John Smith</h5>
-            <p class="text-muted mb-1">User</p>
+            <h5 class="my-3">{{ request.user }}</h5>
+            <p class="text-muted mb-1">
+              {% if request.user.is_superuser %}
+                Quyền truy cập: Admin
+              {% else %}
+                Quyền truy cập: User
+              {% endif %}
+
+            </p>
             <div class="d-flex justify-content-center mb-2">
 <!--              <form method="post" enctype="multipart/form-data">-->
 <!--                {% csrf_token %}-->
 <!--                <input type="file" name="image">-->
 <!--                <button type="submit">Tải lên</button>-->
 <!--            </form>-->
-              <button type="button" class="btn btn-primary">Lưu</button>
-              <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+              <button type="button" class="btn btn-outline-primary">Chỉnh sửa</button>
+<!--              <button type="button" class="btn btn-outline-primary ms-1">Message</button>-->
             </div>
           </div>
         </div>
@@ -55,7 +62,7 @@
                   <label for="{{ form.first_name.id_for_label }}">Họ</label>
                 </div>
                 <div class="col-sm-9">
-                  {{ form.first_name }}
+                  {{ form.last_name }}
                 </div>
               </div>
               <hr>
