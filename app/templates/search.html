@@ -36,20 +36,20 @@
         <div class="row">
           {% for product in key %}
           <div class="col-md-8 col-lg-6 col-xl-3 mt-5">
-            <div class="card" style="border-radius: 15px;">
+            <div class="card product" style="border-radius: 15px;">
               <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light"
                 data-mdb-ripple-color="light">
                 <img src="{{product.image.url}}"
-                  style="border-top-left-radius: 15px; border-top-right-radius: 15px;" class="img-fluid"
+                  style="border-top-left-radius: 15px; border-top-right-radius: 15px;" class="img-fluid img-product"
                   alt="Laptop" />
-                <a href="#!">
-                  <div class="mask"></div>
-                </a>
+<!--                <a href="#!">-->
+<!--                  <div class="mask"></div>-->
+<!--                </a>-->
               </div>
               <div class="card-body pb-0">
                 <div class="d-flex justify-content-between">
                   <div>
-                    <p class="text-dark">{{product.name}}</p>
+                    <p class="text-dark" style="height:60px">{{product.name}}</p>
                     <p class="small text-muted">Laptops</p>
                   </div>
                 </div>
@@ -57,7 +57,7 @@
               <hr class="my-0" />
               <div class="card-body pb-0">
                 <div class="d-flex justify-content-between">
-                  <h5 class="mb-0" style="color: #d0021c;">{{product.price}} đ</h5>
+                  <h5 class="mb-0" style="color: #d0021c;">{{product.price|floatformat:0}} đ</h5>
                   <p style="color: #eb5757;background: #fff0e9;padding:5px;border-radius:10px">-50%</p>
                 </div>
 
@@ -72,8 +72,8 @@
               <hr class="my-0" />
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center pb-2 mb-1">
-                  <a href="#!" class="text-dark fw-bold">Chi tiet</a>
-                  <button type="button" class="btn btn-primary update-cart" id="cart" data-product="{{product.id}}" data-action="add" >Add to cart</button>
+                  <a href="{% url 'detail/' product.id %}" class="text-dark fw-bold">Chi tiết</a>
+                  <button type="button" class="btn btn-primary update-cart" id="cart" onclick="handleBuy({{product.id}},'add')">Mua ngay</button>
                 </div>
               </div>
             </div>
@@ -84,5 +84,30 @@
     </section>
 
 </div>
+<style>
+.product{
+  transition: transform .1s ease-out;
+  display: inline-block;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  overflow:hidden;
+
+}
+.product:hover {
+  transform: translate(0, -10px);
+}
+.product img{
+  transition: transform .1s ease-out;
+}
+.product img:hover{
+  transform: scale(1.1)
+}
+.img-product{
+  width:300px;
+  height:250px;
+  background-size:cover
+}
+
+</style>
+
 
 {% endblock search-content %}

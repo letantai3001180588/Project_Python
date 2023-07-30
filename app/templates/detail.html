@@ -37,7 +37,7 @@
 						<p class="product-description">
                             Laptop hiện đại với đồ họa cực đỉnh
                         </p>
-						<h4 class="price" style="margin-top:10px">Giá ưu đãi: <span class="text-danger">{{product.price}} đ</span></h4>
+						<h4 class="price" style="margin-top:10px">Giá ưu đãi: <span class="text-danger">{{product.price |floatformat:0}} đ</span></h4>
 						<p class="vote"><strong>91%</strong> người dùng thích sản phẩm <strong>(87 votes)</strong></p>
 
 						<div class="row sizes">
@@ -63,7 +63,7 @@
 							<span class="color blue"></span>
 						</h5>
 						<div class="action">
-							<button class="btn btn-primary update-cart" type="button" data-product="{{product.id}}" data-action="add">Mua ngay</button>
+							<button class="btn btn-primary update-cart" type="button" onclick="handleBuy({{product.id}},'add')">Mua ngay</button>
 							<button class="btn btn-outline-primary" type="button">
                                 Trả góp
                             </button>
@@ -78,7 +78,7 @@
         <h3 class="mx-5">
             ĐẶC ĐIỂM NỔI BẬT: {{product.name}}
         </h3>
-        <p class="px-5" style="font-size:22px;margin-bottom:50px">
+        <p class="px-5 pb-5" style="font-size:22px;margin-bottom:50px">
             {{product.description}}
         </p>
         <span class="mt-5"></span>

@@ -1,22 +1,14 @@
-let updateBtn = document.getElementsByClassName("update-cart");
-
-for(i=0; i<updateBtn.length; i++){
-    updateBtn[i].addEventListener('click', function (){
-        let productId = this.dataset.product
-        let action = this.dataset.action
-        console.log(productId)
-        console.log(action)
-        if (user === 'AnomymousUser'){
-            console.log('user not login')
-        }
-        else{
-            updateOrder(productId,action)
-        }
-    })
+function handleBuy(productId,action){
+    if (user == 'AnonymousUser'){
+        alert('Bạn cần đăng nhập!')
+    }
+    else{
+        updateOrder(productId,action)
+    }
 }
 
+
 function updateOrder(productId,action){
-    console.log('token :'+csrftoken)
     let url='/update_item/'
     fetch(url,{
         method:'POST',
@@ -25,7 +17,6 @@ function updateOrder(productId,action){
             'X-CSRFToken':csrftoken
         },
         body: JSON.stringify({'productId':productId,'action':action})
-
     })
     .then((res)=>{
         return res.json()
@@ -35,4 +26,7 @@ function updateOrder(productId,action){
         window.location.reload(true);
     })
 
+
+
 }
+

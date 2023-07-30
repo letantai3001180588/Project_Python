@@ -34,7 +34,7 @@ def cart(request):
         order = {'get_cart_items': 0, 'get_cart_total': 0}
         cartItem = order['get_cart_items']
 
-    context = {'items': items, 'order': order, 'items': items}
+    context = {'items': items, 'order': order, 'items': items,'cart':cartItem}
     return render(request, 'cart.html', context)
 
 
@@ -114,10 +114,15 @@ def updateItem(request):
         return JsonResponse('update item in cart, success', safe=False)
 
 def search(request):
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItem = order.get_cart_items
     if request.method == "POST":
         search = request.POST['searched']
         key = Product.objects.filter(name__contains = search)
-    context = {'search':search,'key':key}
+    context = {'search':search,'key':key, 'cart':cartItem}
     return render(request, 'search.html', context)
 
 def deleteItem(request, id):
@@ -126,10 +131,16 @@ def deleteItem(request, id):
     return redirect('cart')
 
 def detail(request, id):
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItem = order.get_cart_items
     product = Product.objects.filter(id=id)
-    context={'product':product}
-    return render(request, 'detail.html',context)
+    context = {'product': product, 'cart': cartItem}
+    return render(request, 'detail.html', context)
 
+@login_required()
 def changePasswod(request):
     if request.method == 'POST':
         form = PasswordChangeForm(user=request.user, data=request.POST)
