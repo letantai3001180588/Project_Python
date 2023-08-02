@@ -136,6 +136,8 @@ def detail(request, id):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItem = order.get_cart_items
+    else:
+        cartItem = []
     product = Product.objects.filter(id=id)
     context = {'product': product, 'cart': cartItem}
     return render(request, 'detail.html', context)

@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
+
 {% block cart-content %}
 <section class="h-100 h-custom" >
   <div class="container py-5 h-100 mt-5">
@@ -82,7 +84,7 @@
 
                   <div class="d-flex justify-content-between mb-4">
                     <h5 class="text-uppercase">sản phẩm x {{order.get_cart_items}}</h5>
-                    <h5>{{order.get_cart_total|floatformat:0}} đ</h5>
+                    <h5>{{order.get_cart_total|floatformat:0|intcomma}} đ</h5>
                   </div>
 
                   <h5 class="text-uppercase mb-3">Vận chuyển</h5>

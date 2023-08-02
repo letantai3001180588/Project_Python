@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'app'
 ]
 
@@ -84,6 +85,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'laptopshop',
+    #     'USER': 'root',
+    #     'PASSWORD': '123456',
+    #     'HOST': 'localhost',
+    #     'PORT': 3306,
+    # }
 }
 # DATABASES['default']= dj_database_url.parse("postgres://laptopshop_user:4rkFZ5TSGRRMfhOeRzCxY4q3U4UogSKM@dpg-cj2diod9aq0e0q1ijksg-a/laptopshop")
 
