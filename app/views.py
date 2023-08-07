@@ -168,9 +168,8 @@ def update_profile(request):
         if form.is_valid():
             form.save()
             return redirect('home')
-    # elif request.method == 'POST' and request.FILES['image']:
-    #     image = request.FILES['image']
-    #     return redirect('cart')
+        else:
+            messages.info(request, 'Can not update user')
     else:
         form = UserProfileForm(instance=request.user)
 
