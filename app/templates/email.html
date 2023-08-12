@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load humanize %}
+
+</head>
+<body>
+    <h1>Danh sách sản phẩm bạn đã đặt hàng tại Shop Laptops</h1>
+    <p>
+        <span style="margin-right:50px"><b>Người dùng:</b> {{customer}}</span>
+        <span style="margin-right:50px"><b>Số điện thoại:</b> {{phone}}</span>
+        <span style="margin-right:50px"><b>Địa chỉ:</b> {{address}}</span>
+    </p>
+    <p>Ghé thăm shop để nhận nhiều ưu đãi tại: <a href="https://shop-laptop.onrender.com/">https://shop-laptop.onrender.com/</a> </p>
+    <table style="width: 100%;">
+        <thead>
+            <tr >
+            <th style="border: 1px solid #dddddd;padding: 8px;" scope="col">ID</th>
+            <th style="border: 1px solid #dddddd;padding: 8px;" scope="col">Ảnh</th>
+            <th style="border: 1px solid #dddddd;padding: 8px;" scope="col">Tên sản phẩm</th>
+            <th style="border: 1px solid #dddddd;padding: 8px;" scope="col">Số lượng</th>
+            <th style="border: 1px solid #dddddd;padding: 8px;" scope="col">Đơn giá</th>
+            <th style="border: 1px solid #dddddd;padding: 8px;" scope="col">Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody >
+            {% for item in items %}
+            <tr>
+                <th style="border: 1px solid #dddddd;padding: 8px;">1</th>
+                <td style="border: 1px solid #dddddd;padding: 8px;">
+                    <img style="width: 50px;height: 50px;margin-left:30%;"
+                    src="https://shop-laptop.onrender.com/{{item.product.image}}"/>
+                </td>
+                <td style="border: 1px solid #dddddd;padding: 8px;">
+                   {{item.product.name}}
+                </td>
+                <td style="border: 1px solid #dddddd;padding: 8px;">
+                    {{item.quantity}}
+                </td>
+                <td style="border: 1px solid #dddddd;padding: 8px";>
+                    {{item.product.price|floatformat:0|intcomma}}
+                </td>
+                <td style="border: 1px solid #dddddd;padding: 8px">
+                    {% widthratio  item.quantity 1 item.product.price %}
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td style="border: 1px solid #dddddd;padding: 8px" colspan="5">
+                    <h3>Tổng tiền</h3>
+                </td>
+                <td style="border: 1px solid #dddddd;padding: 8px">
+                    {{order.get_cart_total|floatformat:0|intcomma}} đ
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

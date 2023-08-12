@@ -36,17 +36,17 @@
 
     </script>
      <style>
-      body::-webkit-scrollbar
+      ::-webkit-scrollbar
       {
           width: 10px;
       }
-      body::-webkit-scrollbar-track
+      ::-webkit-scrollbar-track
       {
           -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
           border-radius: 10px;
           background-color: #F5F5F5;
       }
-      body::-webkit-scrollbar-thumb
+      ::-webkit-scrollbar-thumb
       {
           border-radius: 10px;
           -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
@@ -128,9 +128,9 @@
 
           <div class="btn-group dropstart">
             {% if user.is_authenticated %}
-              <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" class="rounded-circle" style="width: 50px;" alt="Avatar" />
+              <img src="https://cdn-icons-png.flaticon.com/512/9187/9187604.png" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" class="rounded-circle" style="width: 40px;" alt="Avatar" />
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2" style='margin-top:60px;margin-right:-50px'>
-                <li><a class="dropdown-item active text-center" style="width:90%;margin:auto;border-radius:10px;">{{request.user}}</a></li>
+                <li><a class="dropdown-item active text-center" style="width:90%;margin:auto;border-radius:10px;opacity:0.7">{{request.user}}</a></li>
                 <li><a class="dropdown-item" href="{% url 'profile/' %}">Hồ sơ</a></li>
                 <li><a class="dropdown-item" href="{% url 'changePassword/' %}">Đổi mật khẩu</a></li>
                 <li><a class="dropdown-item" href="{% url 'historyOrder/' %}">Lịch sử mua hàng</a></li>
@@ -266,38 +266,37 @@
 
     <!-- Footer -->
 <!--    <script src="{% static 'js/cart.js' %}" type="text/javascript"></script>-->
-    <script>
-  function handleBuy(productId,action){
-    if (user == 'AnonymousUser'){
-        alert('Bạn cần đăng nhập!')
+  <script>
+    function handleBuy(productId,action,quantity){
+      if (user == 'AnonymousUser'){
+          alert('Bạn cần đăng nhập!')
+      }
+      else{
+          updateOrder(productId,action,quantity)
+          console.log(quantity)
+      }
     }
-    else{
-        updateOrder(productId,action)
+
+
+    function updateOrder(productId,action,quantity){
+      let url='/update_item/'
+      fetch(url,{
+          method:'POST',
+          headers: {
+              'Content-Type':'application/json',
+              'X-CSRFToken':csrftoken
+          },
+          body: JSON.stringify({'productId':productId,'action':action,'quantity':quantity})
+      })
+      .then((res)=>{
+          return res.json()
+      })
+      .then((data) =>{
+          window.location.reload(true);
+      })
     }
-}
 
+  </script>
 
-function updateOrder(productId,action){
-    let url='/update_item/'
-    fetch(url,{
-        method:'POST',
-        headers: {
-            'Content-Type':'application/json',
-            'X-CSRFToken':csrftoken
-        },
-        body: JSON.stringify({'productId':productId,'action':action})
-    })
-    .then((res)=>{
-        return res.json()
-    })
-    .then((data) =>{
-        console.log('data',data)
-        window.location.reload(true);
-    })
-
-
-
-}
-</script>
 </body>
 </html>

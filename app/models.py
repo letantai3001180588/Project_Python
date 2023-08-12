@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.forms import UserChangeForm
+from django.db.models import PositiveIntegerField
 
 # Create your models here.
 class CreateUserForm(UserCreationForm):
@@ -23,6 +24,7 @@ class Product(models.Model):
     price = models.FloatField()
     image = models.ImageField(null=True, blank=True)
     description = models.TextField(max_length=10000, null=True)
+    quantity = PositiveIntegerField()
 
     def __str__(self):
         return str(self.name)
